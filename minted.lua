@@ -4,3 +4,9 @@ function CodeBlock(block)
     local code = table.concat(code_lines, "\n")
     return pandoc.RawBlock('latex', '\\begin{minted}{' .. language .. '}\n' .. code .. '\n\\end{minted}')
 end
+
+-- Inline code
+function Code(el)
+    local language = el.classes[1] or "text" 
+    return pandoc.RawInline('latex', '\\mintinline{' .. language .. '}{' .. el.text .. '}')
+end
